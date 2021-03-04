@@ -53,6 +53,30 @@ main()
   pink='#ff79c6'
   yellow='#f1fa8c'
 
+  # Icons
+  # nf-mdi-arrow_expand
+  icon_zoom='ﬕ'
+  icon_prefix=''
+
+  # switch
+  icon='﨡 '
+  icon_mod='蘒 '
+
+  # map marker
+  # icon=' '
+  # icon_mod='ﭐ '
+
+  # octagon
+  # icon=' '
+  # icon_mod=' '
+
+  # icon='😺 '
+  # icon_mod='😼 '
+
+  # status-left parts
+  status_left_begin="#[bg=${dark_gray}]#{?client_prefix,#[fg=${yellow}],#[fg=${green}]}${icon_prefix}"
+  status_left_switch="#{?client_prefix,#[bg=${yellow}] ${icon_mod},#[bg=${green}] ${icon}}"
+  status_left_zoom="#{?window_zoomed_flag,${icon_zoom} ,}"
 
   # Handle left icon configuration
   case $show_left_icon in
@@ -138,7 +162,7 @@ main()
   # Powerline Configuration
   if $show_powerline; then
 
-      tmux set-option -g status-left "#[bg=${green},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${green},bg=${gray}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
+      tmux set-option -g status-left "${status_left_begin}#[fg=${dark_gray}]${status_left_switch}#S ${status_left_zoom}${left_sep}"
       tmux set-option -g  status-right ""
       powerbg=${gray}
 
@@ -188,7 +212,7 @@ main()
 
   # Non Powerline Configuration
   else
-    tmux set-option -g status-left "#[bg=${green},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon}"
+    tmux set-option -g status-left "${status_left_begin}#[fg=${dark_gray}]${status_left_switch}#S ${status_left_zoom}"
 
     tmux set-option -g  status-right ""
 
