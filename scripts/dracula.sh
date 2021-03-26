@@ -39,6 +39,7 @@ main()
   show_day_month=$(get_tmux_option "@dracula-day-month" false)
   show_time=$(get_tmux_option "@dracula-show-time" true)
   show_refresh=$(get_tmux_option "@dracula-refresh-rate" 5)
+  force_city=$(get_tmux_option "@dracula-force-city")
 
   # Dracula Color Pallette
   white='#f8f8f2'
@@ -105,7 +106,7 @@ main()
 
   # start weather script in background
   if $show_weather; then
-    $current_dir/sleep_weather.sh $show_fahrenheit $show_location &
+    $current_dir/sleep_weather.sh $show_fahrenheit $show_location $force_city &
   fi
 
   # Set timezone unless hidden by configuration

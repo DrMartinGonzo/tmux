@@ -4,13 +4,18 @@ export LC_ALL=en_US.UTF-8
 
 fahrenheit=$1
 location=$2
+force_city=$3
 
 display_location()
 {
 	if $location; then
-		city=$(curl -s https://ipinfo.io/city 2> /dev/null)
-		region=$(curl -s https://ipinfo.io/region 2> /dev/null)
-		echo " $city, $region"
+		if [ -z "$force_city" ]; then
+			city=$(curl -s https://ipinfo.io/city 2> /dev/null)
+			region=$(curl -s https://ipinfo.io/region 2> /dev/null)
+			echo " $city, $region"
+		else
+			echo " $force_city"
+		fi
 	else
 		echo ''
 	fi
@@ -20,7 +25,13 @@ fetch_weather_information()
 {
 	display_weather=$1
 	# it gets the weather condition textual name (%C), and the temperature (%t)
-	curl -sL wttr.in\?format="%C+%t$display_weather"
+	curl -sL wttr.in/Paris\?format="%C+%t$display_weather"
+
+	if [ -z "$force_city" ]; then
+		curl -sL wttr.in\?format="%C+%t$display_weather"
+	else
+		curl -sL wttr.in/$force_city\?format="%C+%t$display_weather"
+	fi
 }
 
 #get weather display
