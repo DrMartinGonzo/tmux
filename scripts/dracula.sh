@@ -56,12 +56,12 @@ main()
 
   # Icons
   # nf-mdi-arrow_expand
-  icon_zoom='ﬕ'
+  icon_zoom=''
   icon_prefix=''
 
   # switch
-  icon='﨡 '
-  icon_mod='蘒 '
+  icon='󰔢 '
+  icon_mod='󰔡 '
 
   # map marker
   # icon=' '
